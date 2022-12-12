@@ -136,6 +136,7 @@ let loop id st addr port maxc granularity handler () =
   in
   let rec do_job () =
     (try
+      Poll.clear events;
       match poll (Poll.Timeout.After 10_000_000L) with
       | Timeout -> Domain.cpu_relax (); ()
       | Accept ->
